@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #ffffff; /* white */
+    --color-foreground: #1f2937; /* gray-800 */
+    --color-border: #e5e7eb; /* gray-200 */
+    --color-input: #ffffff; /* white */
+    --color-ring: #3b82f6; /* blue-500 */
+    
+    /* Card Colors */
+    --color-card: #ffffff; /* white */
+    --color-card-foreground: #1f2937; /* gray-800 */
+    --color-popover: #ffffff; /* white */
+    --color-popover-foreground: #1f2937; /* gray-800 */
+    
+    /* Muted Colors */
+    --color-muted: #f8fafc; /* slate-50 */
+    --color-muted-foreground: #6b7280; /* gray-500 */
+    
+    /* Primary Colors */
+    --color-primary: #1e3a8a; /* blue-800 */
+    --color-primary-foreground: #ffffff; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #17a2b8; /* cyan-600 */
+    --color-secondary-foreground: #ffffff; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #3b82f6; /* blue-500 */
+    --color-accent-foreground: #ffffff; /* white */
+    
+    /* Status Colors */
+    --color-success: #10b981; /* emerald-500 */
+    --color-success-foreground: #ffffff; /* white */
+    
+    --color-warning: #f59e0b; /* amber-500 */
+    --color-warning-foreground: #ffffff; /* white */
+    
+    --color-error: #ef4444; /* red-500 */
+    --color-error-foreground: #ffffff; /* white */
+    
+    --color-destructive: #ef4444; /* red-500 */
+    --color-destructive-foreground: #ffffff; /* white */
+    
+    /* Surface Colors */
+    --color-surface: #f8fafc; /* slate-50 */
+    --color-surface-foreground: #1f2937; /* gray-800 */
+    
+    /* Text Colors */
+    --color-text-primary: #1f2937; /* gray-800 */
+    --color-text-secondary: #6b7280; /* gray-500 */
+    
+    /* Cybersecurity Specific Colors */
+    --color-threat-critical: #ef4444; /* red-500 */
+    --color-threat-high: #f59e0b; /* amber-500 */
+    --color-threat-medium: #3b82f6; /* blue-500 */
+    --color-threat-low: #10b981; /* emerald-500 */
+    --color-threat-info: #17a2b8; /* cyan-600 */
+    
+    /* Animation Variables */
+    --pulse-duration: 2s;
+    --transition-fast: 150ms;
+    --transition-normal: 200ms;
+    --transition-slow: 500ms;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Typography Base Styles */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  /* Security Dashboard Specific Styles */
+  .threat-pulse {
+    animation: pulse var(--pulse-duration) ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  .security-transition {
+    transition: all var(--transition-normal) ease-out;
+  }
+  
+  .security-hover:hover {
+    transition: all var(--transition-fast) ease-out;
+  }
+  
+  /* Focus styles for accessibility */
+  .focus-security:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
+  /* Custom scrollbar for security interfaces */
+  .security-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .security-scrollbar::-webkit-scrollbar-track {
+    background: var(--color-muted);
+  }
+  
+  .security-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+  
+  .security-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
+  }
+}
+
+@layer components {
+  /* Navigation Components */
+.nav-item  {
+    @apply px-6 py-4 text-sm font-medium text-text-secondary hover:text-primary security-transition rounded-md;
+  }
+  
+  .nav-item-active {
+    @apply text-primary bg-muted font-semibold;
+  }
+  
+  /* Security Status Indicators */
+  .status-indicator {
+    @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+  }
+.status-critical  {
+    @apply text-error border;
+  }
+.status-warning  {
+    @apply text-warning border;
+  }
+.status-success  {
+    @apply text-success border;
+  }
+.status-info  {
+    @apply text-secondary border;
+  }
+  
+  /* Card Components */
+  .security-card {
+    @apply bg-card border border-border rounded-lg shadow-sm p-6;
+  }
+  
+  .security-card-header {
+    @apply flex items-center justify-between mb-4;
+  }
+  
+  /* Data Display */
+  .data-metric {
+    @apply font-mono text-2xl font-semibold text-text-primary;
+  }
+  
+  .data-label {
+    @apply text-sm text-text-secondary font-medium;
+  }
+  
+  /* Interactive Elements */
+.security-button  {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-md security-transition;
+  }
+.security-button-primary  {
+    @apply bg-primary text-primary-foreground;
+  }
+.security-button-secondary  {
+    @apply bg-secondary text-secondary-foreground;
+  }
+  
+  .security-button-outline {
+    @apply border border-border bg-background hover:bg-muted;
+  }
+}
+
+@layer utilities {
+  /* Spacing utilities for security layouts */
+  .security-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .security-grid {
+    @apply grid gap-6;
+  }
+  
+  .security-grid-cols-1 {
+    @apply grid-cols-1;
+  }
+  
+  .security-grid-cols-2 {
+    @apply grid-cols-1 lg:grid-cols-2;
+  }
+  
+  .security-grid-cols-3 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .security-grid-cols-4 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+  }
+  
+  /* Text utilities */
+  .text-threat-critical {
+    color: var(--color-threat-critical);
+  }
+  
+  .text-threat-high {
+    color: var(--color-threat-high);
+  }
+  
+  .text-threat-medium {
+    color: var(--color-threat-medium);
+  }
+  
+  .text-threat-low {
+    color: var(--color-threat-low);
+  }
+  
+  .text-threat-info {
+    color: var(--color-threat-info);
+  }
+  
+  /* Background utilities */
+  .bg-threat-critical {
+    background-color: var(--color-threat-critical);
+  }
+  
+  .bg-threat-high {
+    background-color: var(--color-threat-high);
+  }
+  
+  .bg-threat-medium {
+    background-color: var(--color-threat-medium);
+  }
+  
+  .bg-threat-low {
+    background-color: var(--color-threat-low);
+  }
+  
+  .bg-threat-info {
+    background-color: var(--color-threat-info);
+  }
+  
+  /* Animation utilities */
+  .animate-pulse-security {
+    animation: pulse var(--pulse-duration) ease-in-out infinite;
+  }
+  
+  .transition-security {
+    transition: all var(--transition-normal) ease-out;
+  }
+  
+  .transition-security-fast {
+    transition: all var(--transition-fast) ease-out;
+  }
+  
+  .transition-security-slow {
+    transition: all var(--transition-slow) ease-out;
+  }
+}
